@@ -1,0 +1,18 @@
+[2025-12-12 19:28:13,781] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:28:15,648] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:31:30,027] INFO in checklist: Formulario completado - Tipo: macos, Activo: 35986
+[2025-12-12 19:38:41,193] INFO in checklist: Formulario completado - Tipo: macos, Activo: 35986
+[2025-12-12 19:39:12,874] INFO in excel_service: Excel generado: D:\Workspace\app-checklist-pqn-2\output\Activo 35986 Checklist Proquinal MacOS Andri-Pachecho Licenciada-de-Lenguas.xlsx
+[2025-12-12 19:39:33,914] ERROR in file_service: Error al copiar archivo a red: [WinError 53] No se ha encontrado la ruta de acceso de la red: '\\\\172.16.1.22\\checklist$\\'
+[2025-12-12 19:47:03,874] INFO in checklist: Formulario completado - Tipo: pc, Activo: 35986
+[2025-12-12 19:50:39,299] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:51:11,114] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:51:17,739] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:51:19,313] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:51:25,907] INFO in __init__: Aplicación Flask iniciada correctamente
+[2025-12-12 19:51:33,512] INFO in __init__: Aplicación iniciada correctamente
+[2025-12-12 19:51:39,153] INFO in __init__: Aplicación iniciada correctamente
+[2025-12-12 19:51:52,817] INFO in __init__: Aplicación iniciada correctamente
+[2025-12-12 19:52:21,618] INFO in __init__: Aplicación iniciada correctamente
+[2025-12-12 19:52:29,227] INFO in __init__: Aplicación iniciada correctamente
+[2025-12-12 19:52:43,927] INFO in __init__: Aplicación iniciada correctamente

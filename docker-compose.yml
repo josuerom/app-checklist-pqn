@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: checklist-app
+    ports:
+      - "9015:9015"
+    environment:
+      - FLASK_ENV=production
+      - DEBUG=False
+    volumes:
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./templates_excel:/app/templates_excel
+    restart: unless-stopped
+    networks:
+      - checklist-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9015/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  checklist-network:
+    driver: bridge
+
+volumes:
+  output-data:
+  logs-data:
