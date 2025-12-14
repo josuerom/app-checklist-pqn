@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - App Checklist{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col p-8">
+    
+    <!-- Logo Header -->
+    <div class="mb-8 animate__animated animate__fadeInDown">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-7xl mx-auto">
+            <div class="flex justify-center items-center gap-8">
+                <a href="{{ url_for('main.index') }}" class="cursor-pointer">
+                    <img src="{{ url_for('static', filename='img/spradling-mayte.png') }}" 
+                         alt="Logo Spradling-Mayté" 
+                         class="h-32 md:h-40 object-contain hover:scale-110 transition-transform duration-300">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Título Principal -->
+    <div class="mb-12 animate__animated animate__fadeInUp">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-7xl mx-auto text-center">
+            <h1 class="text-2xl md:text-4xl font-extrabold mb-4">
+                <span class="gradient-text">📋 Lista de Chequeo 📋</span>
+            </h1>
+            <h2 class="text-2xl md:text-2xl text-gray-600 font-semibold">
+                Para el Alistamiento de Equipos
+            </h2>
+            <div class="mt-4 flex justify-center gap-3">
+                <span class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">
+                    <i class="bi bi-calendar-check mr-2"></i> 12 de Diciembre 2025
+                </span>
+                <span class="inline-flex items-center px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-sm font-semibold">
+                    <i class="bi bi-shield-check mr-2"></i> Soporte IT PQN
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Grid de Tarjetas -->
+    <div class="flex-1 mb-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                
+                {% for tipo, checklist in checklists.items() %}
+                <a href="{{ url_for('checklist.formulario', tipo=tipo) }}" 
+                   class="block group animate__animated animate__fadeInUp"
+                   style="animation-delay: {{ loop.index0 * 0.1 }}s">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover h-full flex flex-col">
+                        
+                        <!-- Icono Header -->
+                        <div class="bg-gradient-to-br from-{{ checklist.color }}-400 to-{{ checklist.color }}-600 p-8 text-center">
+                            <div class="text-7xl animate-float">{{ checklist.icono }}</div>
+                        </div>
+                        
+                        <!-- Contenido -->
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-{{ checklist.color }}-600 transition-colors">
+                                {{ checklist.titulo }}
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-1">
+                                {{ checklist.descripcion }}
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                <span class="flex items-center">
+                                    <i class="bi bi-list-check mr-1"></i>
+                                    {{ checklist.preguntas|length }} items
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="bi bi-building mr-1"></i>
+                                    {{ checklist.empresa }}
+                                </span>
+                            </div>
+                            
+                            <button class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                                <i class="bi bi-arrow-right-circle mr-2"></i>Iniciar
+                            </button>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+    
+     <!-- Footer -->
+    <div class="animate__animated animate__fadeInUp">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 max-w-7xl mx-auto text-center">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-gray-600 mb-3">
+                <a href="javascript:plantillaEnvioMail()" 
+                   class="flex items-center hover:text-blue-600 transition-colors">
+                    <i class="bi bi-envelope-fill mr-2"></i>
+                    {{ config.SUPPORT_EMAIL }}
+                </a>
+                <span class="hidden md:inline">|</span>
+                <span class="flex items-center">
+                    <i class="bi bi-telephone-fill mr-2"></i>
+                    {{ config.SUPPORT_PHONE }}
+                </span>
+            </div>
+            <p class="text-gray-500 text-sm mb-1">
+                © 2025 Diciembre Bogotá D.C - Stefanini Group CO
+            </p>
+            <p class="text-gray-500 text-sm mb-4">
+                <strong>{{ config.COMPANY_NAME }}</strong> - Todos los derechos reservados
+            </p>
+            
+            <!-- Logos de Empresas -->
+            <div class="flex justify-center items-center gap-6 mt-4 pt-4 border-t border-gray-200">
+                <!-- Logo Proquinal -->
+                <a href="https://spradling.group/es-la" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="opacity-50 hover:opacity-100 transition-opacity duration-300">
+                    <img src="{{ url_for('static', filename='img/proquinal.png') }}" 
+                         alt="Logo Proquinal" 
+                         class="h-7 object-contain">
+                </a>
+                
+                <!-- Logo Stefanini -->
+                <a href="https://stefanini.com/es/stefanini/latam-digital-hub" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="opacity-50 hover:opacity-100 transition-opacity duration-300">
+                    <img src="{{ url_for('static', filename='img/stefanini.png') }}" 
+                         alt="Logo Stefanini" 
+                         class="h-7 object-contain">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

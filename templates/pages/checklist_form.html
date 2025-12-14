@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Formulario - {{ checklist.titulo }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .input-focus {
+        transition: all 0.3s ease;
+    }
+    
+    .input-focus:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.3);
+    }
+    
+    .form-card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-4xl">
+        
+        <!-- Botón Volver -->
+        <div class="mb-6 animate__animated animate__fadeInDown">
+            <a href="{{ url_for('main.index') }}" 
+               class="inline-flex items-center text-white font-semibold text-lg hover:text-gray-200 transition-colors">
+                <i class="bi bi-arrow-left-circle text-2xl mr-2"></i>
+                Regresar
+            </a>
+        </div>
+        
+        <!-- Card Principal -->
+        <div class="form-card rounded-3xl shadow-2xl p-8 md:p-12 animate__animated animate__fadeInUp">
+            
+            <!-- Header del Formulario -->
+            <div class="text-center mb-10">
+                <div class="text-7xl mb-6 animate-float">{{ checklist.icono }}</div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-3">
+                    {{ checklist.titulo }}
+                </h1>
+                <p class="text-xl text-gray-600">
+                    Por favor, completa los siguientes datos antes de continuar
+                </p>
+                <div class="mt-4 inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-lg">
+                    <i class="bi bi-info-circle mr-2"></i>
+                    {{ checklist.preguntas|length }} verificaciones a realizar
+                </div>
+            </div>
+            
+            <!-- Formulario -->
+            <form method="POST" id="datosForm" class="space-y-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Activo Fijo -->
+                    <div class="space-y-2">
+                        <label for="activo_fijo" class="flex items-center text-gray-700 font-semibold text-lg">
+                            <i class="bi bi-hash text-blue-600 text-2xl mr-2"></i>
+                            Número del Activo Fijo
+                        </label>
+                        <input type="text" 
+                               id="activo_fijo" 
+                               name="activo_fijo" 
+                               placeholder="Ej: 35294"
+                               required
+                               class="input-focus w-full px-5 py-4 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none text-lg">
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <i class="bi bi-lightbulb mr-1"></i>
+                            Ingresa el número de placa
+                        </p>
+                    </div>
+                    
+                    <!-- Propietario -->
+                    <div class="space-y-2">
+                        <label for="propietario" class="flex items-center text-gray-700 font-semibold text-lg">
+                            <i class="bi bi-person text-blue-600 text-2xl mr-2"></i>
+                            Destinatario del Dispositivo
+                        </label>
+                        <input type="text" 
+                               id="propietario" 
+                               name="propietario" 
+                               placeholder="Ej: Andri Pacheco"
+                               required
+                               class="input-focus w-full px-5 py-4 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none text-lg">
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <i class="bi bi-lightbulb mr-1"></i>
+                            Primer nombre y apellido
+                        </p>
+                    </div>
+                    
+                    <!-- Cargo -->
+                    <div class="space-y-2">
+                        <label for="cargo" class="flex items-center text-gray-700 font-semibold text-lg">
+                            <i class="bi bi-briefcase text-blue-600 text-2xl mr-2"></i>
+                            Cargo del Destinatario
+                        </label>
+                        <input type="text" 
+                               id="cargo" 
+                               name="cargo" 
+                               placeholder="Ej: Consultora BI"
+                               required
+                               class="input-focus w-full px-5 py-4 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none text-lg">
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <i class="bi bi-lightbulb mr-1"></i>
+                            Cargo del usuario según su ingreso
+                        </p>
+                    </div>
+                    
+                    <!-- Técnico -->
+                    <div class="space-y-2">
+                        <label for="tecnico" class="flex items-center text-gray-700 font-semibold text-lg">
+                            <i class="bi bi-tools text-blue-600 text-2xl mr-2"></i>
+                            Técnico Responsable
+                        </label>
+                        <input type="text" 
+                               id="tecnico" 
+                               name="tecnico" 
+                               placeholder="Ej: Pepe Pérez"
+                               required
+                               class="input-focus w-full px-5 py-4 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none text-lg">
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <i class="bi bi-lightbulb mr-1"></i>
+                            Primer nombre y apellido de quien prepara
+                        </p>
+                    </div>
+                    
+                </div>
+                
+                <!-- Botón Submit -->
+                <div class="text-center pt-6">
+                    <button type="submit" 
+                            class="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-xl px-12 py-5 rounded-2xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                        <i class="bi bi-check-circle mr-2"></i>
+                        Continuar al Checklist
+                    </button>
+                </div>
+                
+            </form>
+            
+            <!-- Aviso de Seguridad -->
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-500 flex items-center justify-center">
+                    <i class="bi bi-shield-check text-green-500 text-xl mr-2"></i>
+                    Los datos están protegidos y solo se usan para el presente checklist
+                </p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Validación en tiempo real
+    document.getElementById('datosForm').addEventListener('submit', function(e) {
+        const inputs = this.querySelectorAll('input[required]');
+        let valid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                valid = false;
+                input.classList.add('border-red-500');
+            } else {
+                input.classList.remove('border-red-500');
+            }
+        });
+        
+        if (!valid) {
+            e.preventDefault();
+            alert('Por favor, completa todos los campos requeridos');
+        }
+    });
+</script>
+{% endblock %}

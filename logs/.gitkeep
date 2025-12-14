@@ -1,0 +1,2 @@
+# Este archivo mantiene la carpeta logs/ en Git
+# Los archivos .log serán ignorados por .gitignore

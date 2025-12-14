@@ -1,0 +1,2 @@
+# Este archivo mantiene la carpeta output/ en Git
+# Los archivos .xlsx generados serán ignorados por .gitignore

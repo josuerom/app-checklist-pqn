@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Página No Encontrada{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center p-8">
+    <div class="text-center">
+        <div class="animate__animated animate__bounceIn">
+            <div class="text-9xl mb-8 animate-float">🔍</div>
+            <h1 class="text-6xl font-extrabold text-white mb-4">404</h1>
+            <h2 class="text-3xl font-bold text-white mb-8">Página No Encontrada</h2>
+            <p class="text-xl text-white opacity-90 mb-12">
+                Lo sentimos, la página que buscas no existe o ha sido movida. Informale al creador.
+            </p>
+            <a href="{{ url_for('main.index') }}" 
+               class="inline-flex items-center bg-white text-purple-600 font-bold text-xl px-8 py-4 rounded-2xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                <i class="bi bi-house-door-fill mr-2"></i>
+                Regresar
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+<footer class="bg-white rounded-3xl shadow-2xl p-6 mt-8 animate__animated animate__fadeInUp">
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Info Principal -->
+        <div class="text-center mb-6">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-gray-600 mb-4">
+                <!-- Email -->
+                <a href="javascript:plantillaEnvioMail()" 
+                   class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
+                    <i class="bi bi-envelope-fill text-xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">{{ config.SUPPORT_EMAIL }}</span>
+                </a>
+                
+                <span class="hidden md:inline text-gray-400">|</span>
+                
+                <!-- Teléfono -->
+                <a href="tel:{{ config.SUPPORT_PHONE.replace(' ', '') }}" 
+                   class="flex items-center gap-2 hover:text-green-600 transition-colors group">
+                    <i class="bi bi-telephone-fill text-xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">{{ config.SUPPORT_PHONE }}</span>
+                </a>
+                
+                <span class="hidden md:inline text-gray-400">|</span>
+                
+                <!-- GitHub (opcional) -->
+                <a href="#" 
+                   class="flex items-center gap-2 hover:text-gray-800 transition-colors group">
+                    <i class="bi bi-github text-xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">{{ config.GITHUB }}</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Divisor -->
+        <div class="border-t border-gray-200 my-4"></div>
+        
+        <!-- Copyright -->
+        <div class="text-center space-y-2">
+            <p class="text-gray-600 text-sm md:text-base">
+                <i class="bi bi-calendar-check text-blue-600"></i>
+                © {{ now.year if now else '2025' }} Bogotá D.C - 
+                <strong class="text-gray-800">Stefanini Group CO</strong>
+            </p>
+            <p class="text-gray-600 text-sm md:text-base">
+                <strong class="text-blue-600">{{ config.COMPANY_NAME }}</strong> - Todos los derechos reservados
+            </p>
+        </div>
+        
+        <!-- Badges -->
+        <div class="flex justify-center gap-3 mt-4 flex-wrap">
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
+                <i class="bi bi-shield-check mr-1"></i> Sistema Seguro
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                <i class="bi bi-lightning-charge-fill mr-1"></i> Alto Performance
+            </span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">
+                <i class="bi bi-code-slash mr-1"></i> v1.1.0
+            </span>
+        </div>
+        
+        <!-- Links Adicionales -->
+        <div class="flex justify-center gap-6 mt-6 text-sm">
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                Términos de Uso
+            </a>
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                Privacidad
+            </a>
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                Soporte
+            </a>
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                Documentación
+            </a>
+        </div>
+        
+        <!-- Powered By -->
+        <div class="text-center mt-6 pt-4 border-t border-gray-100">
+            <p class="text-xs text-gray-500">
+                Desarrollado por Josué
+                <i class="bi bi-heart-fill text-red-500 animate-pulse"></i> 
+                en colaboración del equipo 
+                <strong class="text-blue-600">Soporte IT</strong>
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+                Powered by Flask, Tailwind CSS & Python
+            </p>
+        </div>
+        
+    </div>
+</footer>
+
+<!-- Script para email -->
+<script>
+    function plantillaEnvioMail() {
+        const to = '{{ config.SUPPORT_EMAIL }}';
+        const subject = 'QA - App Checklist';
+        const body = [
+            'Buen día, cordial saludo colega Josué',
+            '',
+            'El presente mail al margen de saludarle es para ?',
+            '',
+            'Saludos cordiales,'
+        ].join('\r\n');
+        
+        const href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = href;
+    }
+</script>
+
+<!-- Estilos adicionales inline -->
+<style>
+    footer {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(102, 126, 234, 0.5), 
+            transparent
+        );
+        animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+</style>
